@@ -1,0 +1,28 @@
+.container {
+  max-width: 768px;
+  margin: 120px auto 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  > .mat-icon {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.subheader {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  text-align: left;
+}
