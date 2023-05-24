@@ -5,7 +5,26 @@ import {PanelContainerComponent} from "./_smart-components/panel-container/panel
 const routes: Routes = [
   {
     path: '',
-    component: PanelContainerComponent
+    pathMatch: 'full',
+    redirectTo: 'products',
+  },
+  {
+    path: '',
+    component: PanelContainerComponent,
+    children: [
+      {
+        path: 'products',
+        loadChildren: () => import('./modules/products/products.module').then(m => m.ProductsModule)
+      },
+      {
+        path: 'account',
+        loadChildren: () => import('./modules/account/account.module').then(m => m.AccountModule)
+      }
+    ]
+  },
+  {
+    path: '**',
+    redirectTo: '/products',
   },
 ];
 

@@ -1,17 +1,13 @@
 <div class="container">
     <div class="header">Witaj w naszej aplikacji! <mat-icon [matTooltip]="'Wyloguj'" (click)="logout()">logout</mat-icon></div>
-    <div class="subheader">Specjalnie dla Ciebie mamy parę ciekawostek o kotach:</div>
-    <div
-            infinite-scroll
-            [infiniteScrollThrottle]="300"
-            [infiniteScrollDistance]="1"
-            (scrolled)="onScrollingDown()"
-    >
-        <ng-container *ngFor="let fact of (listData$ | async)">
-            <app-fact-card
-                    *ngIf="fact"
-                    [fact]="fact"
-            ></app-fact-card>
-        </ng-container>
-    </div>
+    <nav mat-tab-nav-bar [tabPanel]="tabPanel">
+      <a
+        mat-tab-link *ngFor="let item of links; let i = index"
+        (click)="navigate(item.link, i)"
+        [active]="activeLink === i"
+      >{{item.label}}</a>
+    </nav>
+    <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+
+    <router-outlet></router-outlet>
 </div>

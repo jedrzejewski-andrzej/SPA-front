@@ -1,0 +1,31 @@
+<div class="container">
+  <h1>Dane użytkownika</h1>
+  
+  <form
+    class="form"
+    *ngIf="formGroup"
+    [formGroup]="formGroup"
+    (ngSubmit)="submitHandler()"
+  >
+    <mat-form-field class="form__control">
+      <mat-label>Clearable input</mat-label>
+      <input [formControl]="getControl('firstName')" matInput type="text">
+    </mat-form-field>
+    <mat-form-field class="form__control">
+      <mat-label>Clearable input</mat-label>
+      <input [formControl]="getControl('lastName')" matInput type="text">
+    </mat-form-field>
+    <mat-form-field class="form__control">
+      <mat-label>Clearable input</mat-label>
+      <input [formControl]="getControl('email')" matInput type="text">
+    </mat-form-field>
+    
+    <button
+      class="form__button"
+      mat-button
+      type="submit"
+    >
+      Zapisz
+    </button>
+  </form>
+</div>
