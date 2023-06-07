@@ -3,6 +3,8 @@ import {Observable, Subscription} from "rxjs";
 import {User} from '../../models/user.model';
 import {UserService} from '../../_services/user.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../../../../../../_services/auth.service';
+import {CookiesService} from '../../../../../../_services/cookies.service';
 
 @Component({
   selector: 'app-account-container',
@@ -13,13 +15,16 @@ export class AccountContainerComponent implements OnInit, OnDestroy {
   private _subscription: Subscription = new Subscription();
   listData$ : Observable<User | null>;
   formGroup: FormGroup;
+  userId: number;
 
   constructor(
+    private _cookiesService: CookiesService,
     private _userService: UserService,
     private _formBuilder: FormBuilder
   ) {}
   
   ngOnInit() {
+    this.userId = +this._cookiesService.get('id')!;
     this.listData$ = this._userService.listData$;
     this.fetchData();
     this._initForm();
@@ -31,6 +36,7 @@ export class AccountContainerComponent implements OnInit, OnDestroy {
   
   private _initForm(): void {
     this.formGroup = this._formBuilder.group({
+      id: [null],
       firstName: [null, [Validators.required]],
       lastName: [null, [Validators.required]],
       email: [null, [Validators.required, Validators.email]],
@@ -51,14 +57,14 @@ export class AccountContainerComponent implements OnInit, OnDestroy {
   
   submitHandler(): void {
     if (this.formGroup.valid) {
-      console.log('test');
+      this._userService.editUserData(this.formGroup.getRawValue()).subscribe();
     } else {
       this.formGroup.markAllAsTouched();
     }
   }
   
   private fetchData(): void {
-    this._userService.fetchData();
+    this._userService.getUserData(this.userId);
   }
   
   ngOnDestroy() {

@@ -11,15 +11,20 @@ export class UserService {
 
   constructor(private readonly _httpClient: HttpClient) {}
 
-  fetchData(): void {
+  getUserData(userId: number): void {
     this._httpClient
-      .get<any>('https://dummyjson.com/users/1')
+      .get<any>(`http://localhost:3000/users/${userId}`)
       .pipe(
         catchError(UserService._errorHandler.bind(this)),
       )
       .subscribe(res => {
         this._listData$.next(res);
       });
+  }
+  
+  editUserData(user: User): Observable<User | null> {
+    return this._httpClient
+      .patch<User>(`http://localhost:3000/users/${user.id}`, user);
   }
 
   clearData(): void {

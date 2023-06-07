@@ -11,19 +11,29 @@ export class ProductsService {
 
   constructor(private readonly _httpClient: HttpClient) {}
 
-  fetchData(limit: number): void {
+  fetchData(): void {
     this._httpClient
-      .get<any>('https://dummyjson.com/products', {
-        params: {limit}
-      })
+      .get<any>('http://localhost:3000/products/get-all')
       .pipe(
         catchError(ProductsService._errorHandler.bind(this)),
       )
       .subscribe(res => {
-        this._listData$.next(res.products);
+        this._listData$.next(res);
       });
   }
-
+  
+  addProduct(data: Product): Observable<any> {
+    return this._httpClient.post<any>('http://localhost:3000/products/create', data);
+  }
+  
+  removeProduct(productId: number): Observable<any> {
+    return this._httpClient.delete(`http://localhost:3000/products/${productId}`);
+  }
+  
+  getProduct(productId: number): Observable<Product | null> {
+    return this._httpClient.get<Product>(`http://localhost:3000/products/${productId}`);
+  }
+  
   clearData(): void {
     this._listData$.next(null);
   }

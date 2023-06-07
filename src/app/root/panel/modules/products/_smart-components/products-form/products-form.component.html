@@ -1,0 +1,26 @@
+<form [formGroup]="formGroup">
+  <h3>Dodaj produkt</h3>
+  <mat-form-field>
+    <mat-label>Nazwa</mat-label>
+    <input type="text" matInput [formControl]="getControl('name')">
+  </mat-form-field>
+  
+  <mat-form-field>
+    <mat-label>Marka</mat-label>
+    <input type="text" matInput [formControl]="getControl('brand')">
+  </mat-form-field>
+  
+  <mat-form-field>
+    <mat-label>Cena</mat-label>
+    <input type="number" matInput [formControl]="getControl('price')">
+  </mat-form-field>
+  
+  <mat-form-field>
+    <mat-label>Ilość</mat-label>
+    <input type="number" matInput [formControl]="getControl('amount')">
+  </mat-form-field>
+  
+  <div class="buttons">
+    <button mat-flat-button (click)="submit()">Wyślij</button>
+  </div>
+</form>

@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from "@angular/core";
 import {Observable} from "rxjs";
 import {ProductsService} from "../../_services/products.service";
 import {Product} from "../../models/product.model";
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-product-list-container',
@@ -10,13 +11,12 @@ import {Product} from "../../models/product.model";
 })
 export class ProductsListContainerComponent implements OnInit, OnDestroy {
   listData$ : Observable<Product[] | null>;
-  limit: number = 10;
   readonly displayedColumns: string[] = [
-    'title',
+    'name',
     'brand',
     'price',
-    'stock',
-    'category',
+    'amount',
+    'actions',
   ];
   
   constructor(
@@ -25,11 +25,19 @@ export class ProductsListContainerComponent implements OnInit, OnDestroy {
   
   ngOnInit() {
     this.listData$ = this._productsService.listData$;
-    this.fetchProducts(this.limit)
+    this.fetchProducts()
   }
   
-  private fetchProducts(limit: number): void {
-    this._productsService.fetchData(limit);
+  private fetchProducts(): void {
+    this._productsService.fetchData();
+  }
+  
+  refetchDataHandler(): void {
+    this.fetchProducts();
+  }
+  
+  removeProduct(productId: number): void {
+    this._productsService.removeProduct(productId).subscribe(() => this.fetchProducts());
   }
   
   ngOnDestroy() {
