@@ -1,10 +1,9 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
-import {Observable, Subscription} from "rxjs";
-import {User} from '../../models/user.model';
-import {UserService} from '../../_services/user.service';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {AuthService} from '../../../../../../_services/auth.service';
-import {CookiesService} from '../../../../../../_services/cookies.service';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Observable, Subscription } from "rxjs";
+import { User } from '../../models/user.model';
+import { UserService } from '../../_services/user.service';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { CookiesService } from '../../../../../../_services/cookies.service';
 
 @Component({
   selector: 'app-account-container',
@@ -36,7 +35,7 @@ export class AccountContainerComponent implements OnInit, OnDestroy {
   
   private _initForm(): void {
     this.formGroup = this._formBuilder.group({
-      id: [null],
+      id: [this.userId],
       firstName: [null, [Validators.required]],
       lastName: [null, [Validators.required]],
       email: [null, [Validators.required, Validators.email]],

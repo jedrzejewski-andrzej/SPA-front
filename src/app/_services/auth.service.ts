@@ -1,17 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {Observable, of} from 'rxjs';
+import { Observable } from 'rxjs';
 import { AuthModel } from 'src/models/auth/auth.model';
+import { CookiesService } from './cookies.service';
 
 @Injectable()
 export class AuthService {
-  constructor(private _httpClient: HttpClient) {}
+  constructor(private _httpClient: HttpClient, private _cookiesService: CookiesService) {}
 
-  login(userDTO: AuthModel.LoginDTO): Observable<any> {
-    return of(userDTO.email)
-  }
-
-  logout(): Observable<boolean> {
-    return of(true);
+  login(loginDTO: AuthModel.LoginDTO): Observable<any> {
+    return this._httpClient.post('http://localhost:3000/auth/login', loginDTO)
   }
 }

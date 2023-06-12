@@ -16,6 +16,7 @@ import {APP_FACADES} from "./store/facades";
 import {APP_GUARDS} from "./guards";
 import {APP_SERVICES} from "./_services";
 import {HttpClientModule} from "@angular/common/http";
+import {CoreModule} from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import {HttpClientModule} from "@angular/common/http";
       logOnly: environment.production,
     }),
     EffectsModule.forRoot(APP_EFFECTS),
-    HttpClientModule
+    CoreModule
   ],
   providers: [...APP_FACADES, reducerProvider, ...APP_GUARDS, ...APP_SERVICES],
   bootstrap: [AppComponent]

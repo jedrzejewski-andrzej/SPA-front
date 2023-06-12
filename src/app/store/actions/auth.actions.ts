@@ -16,11 +16,11 @@ export const loginFailed = createAction(
   props<{ error: any }>(),
 );
 
-export const initLogin = createAction('[AUTH] init Login');
+export const initLogin = createAction('[AUTH] init login');
 
-export const initLoginFail = createAction('[AUTH] init Login fail');
+export const initLoginFail = createAction('[AUTH] init login fail');
 
-export const initLoginSuccess = createAction('[AUTH] init  Login success');
+export const initLoginSuccess = createAction('[AUTH] init login success');
 
 export const logout = createAction('[AUTH] logout');
 

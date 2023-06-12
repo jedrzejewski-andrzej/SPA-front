@@ -33,7 +33,8 @@ export class AuthEffects {
       return this._actions$.pipe(
         ofType(fromActions.loginSuccess),
         tap(({ data }) => {
-          this._cookiesService.set('user', JSON.stringify(data));
+          this._cookiesService.set('token', data.access_token);
+          this._cookiesService.set('id', data.id);
           this._router.navigate(['/panel']);
         }),
       );
@@ -45,7 +46,7 @@ export class AuthEffects {
     return this._actions$.pipe(
       ofType(fromActions.initLogin),
       map(() => {
-        const userCookies: any | null = this._cookiesService.get('user') || null;
+        const userCookies: any | null = this._cookiesService.get('token') || null;
         if (userCookies) {
           return fromActions.initLoginSuccess();
         }
@@ -72,7 +73,8 @@ export class AuthEffects {
     this._actions$.pipe(
       ofType(fromActions.logout),
       tap(() => {
-        this._authService.logout().subscribe();
+        this._cookiesService.deleteAllCookies();
+        this._router.navigate([`auth/login`]);
       }),
       map(() => fromActions.logoutSuccess()),
     ),
