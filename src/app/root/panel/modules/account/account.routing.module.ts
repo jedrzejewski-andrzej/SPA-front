@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {AccountContainerComponent} from './_smart-components/account-container/account-container.component';
+import { AccountContainerComponent } from './_smart-components/account-container/account-container.component';
 
 const routes: Routes = [
   {

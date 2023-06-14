@@ -6,7 +6,7 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import {CookiesService} from '../../_services/cookies.service';
+import { CookiesService } from '../../_services/cookies.service';
 
 
 @Injectable()
@@ -18,7 +18,6 @@ export class AuthorizationInterceptor implements HttpInterceptor {
     next: HttpHandler,
   ): Observable<HttpEvent<any>> {
     const token: string | undefined = this._accessToken;
-    console.log(request);
   
     request = request.clone({
       setHeaders: {

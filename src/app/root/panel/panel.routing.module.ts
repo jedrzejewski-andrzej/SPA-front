@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {PanelContainerComponent} from "./_smart-components/panel-container/panel-container.component";
+import { PanelContainerComponent } from "./_smart-components/panel-container/panel-container.component";
 
 const routes: Routes = [
   {

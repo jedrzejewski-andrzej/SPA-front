@@ -1,8 +1,7 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
-import {Observable} from "rxjs";
-import {ProductsService} from "../../_services/products.service";
-import {Product} from "../../models/product.model";
-import {MatDialog} from '@angular/material/dialog';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Observable } from "rxjs";
+import { ProductsService } from "../../_services/products.service";
+import { Product } from "../../models/product.model";
 
 @Component({
   selector: 'app-product-list-container',
